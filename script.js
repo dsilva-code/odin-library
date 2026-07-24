@@ -16,7 +16,10 @@ function addBookToLibrary (title, author, pages, read) {
 }
 
 function libraryInfo () {
+
+    
     for (let i = 0; i < myLibrary.length; i++) {
+        
         console.log(myLibrary[i].title + ", " + myLibrary[i].author + ", " + myLibrary[i].pages + ", " + myLibrary[i].read + ", " + myLibrary[i].id);
     }
 }
@@ -27,5 +30,8 @@ addBookToLibrary("Project Hail Mary", "Andy Weir", 290, false);
 addBookToLibrary("Stoner", "John Williams", 140, true);
 addBookToLibrary("A Fig for all Devils", "C.S Fritz", 90, true);
 
+    const pageBody = document.getElementById("library");
 
+    
 libraryInfo();
+
