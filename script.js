@@ -12,13 +12,20 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary (title, author, pages, read) {
     book1 = new Book(title, author, pages, read);
-    return book1;
+    myLibrary.push(book1);
+}
+
+function libraryInfo () {
+    for (let i = 0; i < myLibrary.length; i++) {
+        console.log(myLibrary[i].title + ", " + myLibrary[i].author + ", " + myLibrary[i].pages + ", " + myLibrary[i].read + ", " + myLibrary[i].id);
+    }
 }
 
 const myLibrary = [];
 
-const projectHailMary = new Book("Project Hail Mary", "Andy Weir", 290, false);
-const stoner = new Book("Stoner", "John Williams", 140, true);
+addBookToLibrary("Project Hail Mary", "Andy Weir", 290, false);
+addBookToLibrary("Stoner", "John Williams", 140, true);
+addBookToLibrary("A Fig for all Devils", "C.S Fritz", 90, true);
 
 
-console.log(addBookToLibrary("YO","YO", 100, false))
+libraryInfo();
