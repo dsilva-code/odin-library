@@ -9,8 +9,26 @@
 <body>
     <script src="script.js" defer></script>
     <div id="library">
-        Yo
+    
     </div>
-    <button id="newBook">New Book</button>
+
+    <button id="newBook" command="show-modal" commandfor="my-dialog">New Book</button>
+    <dialog id="my-dialog">
+        <form>
+            <label for="bookTitle">Title:</label>
+            <input type="text" name="bookTitle" id="bookTitle">
+            <br>
+            <label for="bookAuthor">Author:</label>
+            <input type="text" name="bookAuthor" id="bookAuthor">
+            <br>
+            <label for="bookPages">Pages:</label>
+            <input type="number" name="bookPages" id="bookPages">
+            <br>
+            <label for="bookRead">Read:</label>
+            <input type="checkbox" name="bookRead" id="bookRead">
+            <br>
+            <input type="submit" name="bookSubmut" id="bookSubmit";>
+        </form>
+    </dialog>
 </body>
 </html>
