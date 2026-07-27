@@ -32,16 +32,14 @@ function libraryInfo () {
     for (let i = 0; i < myLibrary.length; i++) {
         const newBook = document.createElement('div');
         newBook.innerHTML = "<br>Title: " + myLibrary[i].title + "<br>Author: " + myLibrary[i].author + "<br>Pages: " + myLibrary[i].pages + "<br>Read: " + myLibrary[i].read + "<br>ID: " + myLibrary[i].id + "<br>";
-        
+        newBook.dataset.id = myLibrary[i].id;
         pageBody.appendChild(newBook);
     }
 
     const books = document.querySelectorAll("#library div");
     
     for (const element of books) {
-        
         const removeButton = document.createElement("button");
-        removeButton.dataset.id = myLibrary[i].id;
         removeButton.className = "removeButtons";
         removeButton.textContent = "Remove Book";
         element.appendChild(removeButton);
@@ -78,6 +76,18 @@ function submitClick(event) {
     let read = bookRead.checked;
     addBookToLibrary (title, author, pages, read);
     libraryInfo();
+
+    const removeButtons = document.querySelectorAll(".removeButtons");
+
+    for(const element of removeButtons) {
+        element.addEventListener("click", removeClick);
+    }
+
+    const readButtons = document.querySelectorAll(".readButtons");
+
+    for (const element of readButtons) {
+        element.addEventListener("click", readClick);
+    }
 }
 
 
@@ -91,11 +101,26 @@ for(const element of removeButtons) {
 
 function removeClick(event) {
     const button = this;
-    const removeBook = button.parentElement.id;
-    console.log(removeBook);
+    const removeBook = button.parentElement.dataset.id;
+    const found = myLibrary.findIndex((element) => element.id === removeBook);
+    myLibrary.splice(found, 1);
+    libraryInfo();
+
+    const removeButtons = document.querySelectorAll(".removeButtons");
+
+    for(const element of removeButtons) {
+        element.addEventListener("click", removeClick);
+    }
+
+    const readButtons = document.querySelectorAll(".readButtons");
+
+    for (const element of readButtons) {
+        element.addEventListener("click", readClick);
+    }
+
 };
 
-/*
+
 const readButtons = document.querySelectorAll(".readButtons");
 
 for (const element of readButtons) {
@@ -103,7 +128,27 @@ for (const element of readButtons) {
 }
 
 function readClick(event) {
-    myLibrary[0].changeRead();
+    const button = this;
+    const readBook = button.parentElement.dataset.id;
+    const found = myLibrary.findIndex((element) => element.id === readBook);
+    
+    if (myLibrary[found].read === true) {
+        myLibrary[found].read = false;
+    } else {
+        myLibrary[found].read = true;
+    }
+
     libraryInfo();
+
+    const readButtons = document.querySelectorAll(".readButtons");
+
+    for (const element of readButtons) {
+        element.addEventListener("click", readClick);
+    }
+
+    const removeButtons = document.querySelectorAll(".removeButtons");
+
+    for(const element of removeButtons) {
+        element.addEventListener("click", removeClick);
+    }
 }
-*/
