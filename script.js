@@ -11,6 +11,10 @@ function Book(title, author, pages, read) {
     }
 }
 
+Book.prototype.changeRead = function() {
+   this.read = !this.read;
+}
+
 function addBookToLibrary (title, author, pages, read) {
     book1 = new Book(title, author, pages, read);
     myLibrary.push(book1);
@@ -28,16 +32,23 @@ function libraryInfo () {
     for (let i = 0; i < myLibrary.length; i++) {
         const newBook = document.createElement('div');
         newBook.innerHTML = "<br>Title: " + myLibrary[i].title + "<br>Author: " + myLibrary[i].author + "<br>Pages: " + myLibrary[i].pages + "<br>Read: " + myLibrary[i].read + "<br>ID: " + myLibrary[i].id + "<br>";
+        
         pageBody.appendChild(newBook);
     }
 
     const books = document.querySelectorAll("#library div");
     
     for (const element of books) {
+        
         const removeButton = document.createElement("button");
+        removeButton.dataset.id = myLibrary[i].id;
         removeButton.className = "removeButtons";
         removeButton.textContent = "Remove Book";
         element.appendChild(removeButton);
+        const readButton = document.createElement("button");
+        readButton.className = "readButtons";
+        readButton.textContent = "Read Status";
+        element.appendChild(readButton);
     }
 }
 
@@ -79,14 +90,20 @@ for(const element of removeButtons) {
 }
 
 function removeClick(event) {
-    const parentDiv = this.parentNode.parentNode;
-    console.log(parentDiv);
-    parentDiv.removeChild(this.parentNode);
-    
+    const button = this;
+    const removeBook = button.parentElement.id;
+    console.log(removeBook);
 };
 
+/*
+const readButtons = document.querySelectorAll(".readButtons");
 
+for (const element of readButtons) {
+    element.addEventListener("click", readClick);
+}
 
-
-
-
+function readClick(event) {
+    myLibrary[0].changeRead();
+    libraryInfo();
+}
+*/
