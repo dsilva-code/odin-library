@@ -1,4 +1,5 @@
-class Book {
+
+class newBook {
 
     constructor(title, author,pages, read) {
         this.title = title;
@@ -9,20 +10,22 @@ class Book {
     }
 
     get bookInfo() {
-        console.log(this.title + ", " + this.author + ", " + this.pages + ", " + this.read + ", " + this.id)
+        return this.title + ", " + this.author + ", " + this.pages + ", " + this.read + ", " + this.id
     }
 
 }
 
+//book protoype, no idea how to do that with class
 
+class newLibrary {
 
+    myLibrary = [];
 
-
-
-
-
-
-
+    addBook(title, author, page, read) {
+        book1 = new newBook(title, author, page, read);
+        myLibrary.push(book1);
+    }
+}
 
 
 
@@ -179,3 +182,9 @@ function readClick(event) {
         element.addEventListener("click", removeClick);
     }
 }
+
+
+const theLibrary = new newLibrary();
+theLibrary.addBook("Land of the Lustrous", "Akira", 888, true);
+
+
