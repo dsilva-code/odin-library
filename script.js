@@ -61,32 +61,7 @@ class newLibrary {
     }
 
     removeBooks() {
-        const removeButtons = document.querySelectorAll(".removeButtons");
 
-        for(const element of removeButtons) {
-            element.addEventListener("click", removeClick);
-        }
-
-        function removeClick(event) {
-            const button = this;
-            const removeBook = button.parentElement.dataset.id;
-            console.log("test");
-            const found = (myLibrary.getLibrary).findIndex((element) => element.id === removeBook);
-            (myLibrary.getLibrary).splice(found, 1);
-            myLibrary.showBooks;
-
-            const removeButtons = document.querySelectorAll(".removeButtons");
-
-            for(const element of removeButtons) {
-                element.addEventListener("click", removeClick);
-            }
-
-            const readButtons = document.querySelectorAll(".readButtons");
-
-            for (const element of readButtons) {
-                element.addEventListener("click", readClick);
-            }
-        };
     }
     
 }
@@ -104,7 +79,7 @@ theLibrary.addBook("Land of the Lustrous", "Akira", 888, true);
 theLibrary.addBook("Project Hail Mary", "Andy Weir", 472, true);
 console.log(theLibrary);
 theLibrary.showBooks()
-console.log(theLibrary.getLibrary)
+theLibrary.removeBooks();
 
 
 const submit = document.getElementById("bookSubmit");
@@ -139,38 +114,75 @@ function submitClick(event) {
     }
 }
 
+    const removeButtons = document.querySelectorAll(".removeButtons");
 
+    for(const element of removeButtons) {
+        element.addEventListener("click", (event) => {
+            removeClick(event.currentTarget, theLibrary);
+        });
+    }
 
+    function removeClick(buttonElement, libraryInstance) {
+
+        const removeBook = buttonElement.parentElement.dataset.id;
+        const found = libraryInstance.getLibrary.findIndex((element) => element.id === removeBook);
+        (libraryInstance.getLibrary).splice(found, 1);
+        libraryInstance.showBooks();
+        const removeButtons = document.querySelectorAll(".removeButtons");
+  
+        for(const element of removeButtons) {
+            element.addEventListener("click", (event) => {
+                removeClick(event.currentTarget, theLibrary);
+            });
+        }
+
+        const readButtons = document.querySelectorAll(".readButtons");
+
+        for (const element of readButtons) {
+            element.addEventListener("click", (event) => {
+                readClick(event.currentTarget, theLibrary);
+            });
+        }
+            
+    };
+
+    
 
 const readButtons = document.querySelectorAll(".readButtons");
 
 for (const element of readButtons) {
-    element.addEventListener("click", readClick);
+    element.addEventListener("click", (event) => {
+        readClick(event.currentTarget, theLibrary);
+    });
 }
 
-function readClick(event) {
-    const button = this;
-    const readBook = button.parentElement.dataset.id;
-    const found = myLibrary.findIndex((element) => element.id === readBook);
+function readClick(buttonElement, libraryInstance) {
+
+    const readBook = buttonElement.parentElement.dataset.id;
+    const found = libraryInstance.getLibrary.findIndex((element) => element.id === readBook);
     
-    if (myLibrary[found].read === true) {
-        myLibrary[found].read = false;
+    if (libraryInstance.getLibrary[found].read === true) {
+        libraryInstance.getLibrary[found].read = false;
     } else {
-        myLibrary[found].read = true;
+        libraryInstance.getLibrary[found].read = true;
     }
 
-    libraryInfo();
+    libraryInstance.showBooks();
 
     const readButtons = document.querySelectorAll(".readButtons");
 
     for (const element of readButtons) {
-        element.addEventListener("click", readClick);
+        element.addEventListener("click", (event) => {
+            readClick(event.currentTarget, theLibrary);
+        });
     }
 
     const removeButtons = document.querySelectorAll(".removeButtons");
 
     for(const element of removeButtons) {
-        element.addEventListener("click", removeClick);
+        element.addEventListener("click", (event) => {
+            removeClick(event.currentTarget, theLibrary);
+        });
     }
 }
 
