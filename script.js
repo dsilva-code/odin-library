@@ -21,6 +21,10 @@ class newLibrary {
 
     myLibrary = [];
 
+    get getLibrary() {
+        return this.myLibrary;
+    }
+
     addBook(title, author, page, read) {
         let book1 = new newBook(title, author, page, read);
         this.myLibrary.push(book1);
@@ -55,6 +59,35 @@ class newLibrary {
             element.appendChild(readButton);
         }
     }
+
+    removeBooks() {
+        const removeButtons = document.querySelectorAll(".removeButtons");
+
+        for(const element of removeButtons) {
+            element.addEventListener("click", removeClick);
+        }
+
+        function removeClick(event) {
+            const button = this;
+            const removeBook = button.parentElement.dataset.id;
+            console.log("test");
+            const found = (myLibrary.getLibrary).findIndex((element) => element.id === removeBook);
+            (myLibrary.getLibrary).splice(found, 1);
+            myLibrary.showBooks;
+
+            const removeButtons = document.querySelectorAll(".removeButtons");
+
+            for(const element of removeButtons) {
+                element.addEventListener("click", removeClick);
+            }
+
+            const readButtons = document.querySelectorAll(".readButtons");
+
+            for (const element of readButtons) {
+                element.addEventListener("click", readClick);
+            }
+        };
+    }
     
 }
 
@@ -65,6 +98,14 @@ Book.prototype.changeRead = function() {
 }
 
 */
+
+const theLibrary = new newLibrary();
+theLibrary.addBook("Land of the Lustrous", "Akira", 888, true);
+theLibrary.addBook("Project Hail Mary", "Andy Weir", 472, true);
+console.log(theLibrary);
+theLibrary.showBooks()
+console.log(theLibrary.getLibrary)
+
 
 const submit = document.getElementById("bookSubmit");
 const dialog = document.getElementById("my-dialog");
@@ -98,32 +139,7 @@ function submitClick(event) {
     }
 }
 
-const removeButtons = document.querySelectorAll(".removeButtons");
 
-for(const element of removeButtons) {
-    element.addEventListener("click", removeClick);
-}
-
-function removeClick(event) {
-    const button = this;
-    const removeBook = button.parentElement.dataset.id;
-    const found = myLibrary.findIndex((element) => element.id === removeBook);
-    myLibrary.splice(found, 1);
-    libraryInfo();
-
-    const removeButtons = document.querySelectorAll(".removeButtons");
-
-    for(const element of removeButtons) {
-        element.addEventListener("click", removeClick);
-    }
-
-    const readButtons = document.querySelectorAll(".readButtons");
-
-    for (const element of readButtons) {
-        element.addEventListener("click", readClick);
-    }
-
-};
 
 
 const readButtons = document.querySelectorAll(".readButtons");
@@ -158,10 +174,4 @@ function readClick(event) {
     }
 }
 
-
-const theLibrary = new newLibrary();
-theLibrary.addBook("Land of the Lustrous", "Akira", 888, true);
-theLibrary.addBook("Project Hail Mary", "Andy Weir", 472, true);
-console.log(theLibrary);
-theLibrary.showBooks()
 
