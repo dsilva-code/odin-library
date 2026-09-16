@@ -14,19 +14,35 @@
 
     <button id="newBook" command="show-modal" commandfor="my-dialog">New Book</button>
     <dialog id="my-dialog">
-        <form>
-            <label for="bookTitle">Title:</label>
+        <form novalidate>
+
+            
+            <label for="bookTitle">
+            <span>Please enter book title:</span>
             <input type="text" name="bookTitle" id="bookTitle">
+            <span id="titleError" class="error"></span>
+            </label>
             <br>
-            <label for="bookAuthor">Author:</label>
+
+
+            <label for="bookAuthor">
+            <span>Please enter book author:</span>
             <input type="text" name="bookAuthor" id="bookAuthor">
+            <span id="authorError" class="error"></span>
+            </label>
             <br>
-            <label for="bookPages">Pages:</label>
+
+
+            <label for="bookPages">
+            <span>Please enter book pages:</span>
             <input type="number" name="bookPages" id="bookPages">
+            <span id="pageError" class="error"></span>
+            </label>
             <br>
+
+
             <label for="bookRead">Read:</label>
             <input type="checkbox" name="bookRead" id="bookRead">
-
             <br>
             <input type="submit" name="bookSubmut" id="bookSubmit";>
         </form>
