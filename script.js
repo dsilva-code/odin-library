@@ -14,8 +14,9 @@ class newBook {
     }
 
 }
-
 //book protoype, no idea how to do that with class
+
+
 
 class newLibrary {
 
@@ -104,13 +105,17 @@ function submitClick(event) {
     const removeButtons = document.querySelectorAll(".removeButtons");
 
     for(const element of removeButtons) {
-        element.addEventListener("click", removeClick);
+        element.addEventListener("click", (event) => {
+            removeClick(event, theLibrary);
+        });
     }
 
     const readButtons = document.querySelectorAll(".readButtons");
 
     for (const element of readButtons) {
-        element.addEventListener("click", readClick);
+        element.addEventListener("click", (event) => {
+        readClick(event, theLibrary);
+    });
     }
 }
 
@@ -118,13 +123,13 @@ function submitClick(event) {
 
     for(const element of removeButtons) {
         element.addEventListener("click", (event) => {
-            removeClick(event.currentTarget, theLibrary);
+            removeClick(event, theLibrary);
         });
     }
 
     function removeClick(buttonElement, libraryInstance) {
 
-        const removeBook = buttonElement.parentElement.dataset.id;
+        const removeBook = buttonElement.currentTarget.parentElement.dataset.id;
         const found = libraryInstance.getLibrary.findIndex((element) => element.id === removeBook);
         (libraryInstance.getLibrary).splice(found, 1);
         libraryInstance.showBooks();
@@ -132,7 +137,7 @@ function submitClick(event) {
   
         for(const element of removeButtons) {
             element.addEventListener("click", (event) => {
-                removeClick(event.currentTarget, theLibrary);
+                removeClick(event, theLibrary);
             });
         }
 
@@ -140,25 +145,81 @@ function submitClick(event) {
 
         for (const element of readButtons) {
             element.addEventListener("click", (event) => {
-                readClick(event.currentTarget, theLibrary);
+                readClick(event, theLibrary);
             });
         }
             
     };
 
+const bookTitleError = document.querySelector("#bookTitle + span.error");
+
+bookTitle.addEventListener("input", (event) => {
+    if(bookTitle.validity.valid) {
+        bookTitleError.innerHTML = "";
+        bookTitleError.className = "error";
+    } else {
+        showBookTitleError()
+    }
+});
+
+function showBookTitleError() {
+    if(bookTitle.validity.valueMissing) {
+        bookTitleError.textContent = "You need a book title";
+    }
+
+    bookTitleError.className = "error active";
+}
+
+const bookAuthorError = document.querySelector("#bookAuthor + span.error");
+
+bookAuthor.addEventListener("input", (event) => {
+    if(bookAuthor.validity.valid) {
+        bookAuthorError.innerHTML = "";
+        bookAuthorError.className = "error";
+    } else {
+        showBookAuthorError()
+    }
+});
+
+function showBookAuthorError() {
+    if(bookAuthor.validity.valueMissing) {
+        bookAuthorError.textContent = "You need a book author";
+    }
+
+    bookAuthorError.className = "error active";
+}
+
+const bookPagesError = document.querySelector("#bookPages + span.error");
+
+bookPages.addEventListener("input", (event) => {
+    if(bookPages.validity.valid) {
+        bookPagesError.innerHTML = "";
+        bookPagesError.className = "error";
+    } else {
+        showBookPagesError()
+    }
+});
+
+function showBookPagesError() {
+    if(bookPages.validity.valueMissing) {
+        bookPagesError.textContent = "You need a page numbers";
+    }
+
+    bookPagesError.className = "error active";
+}
     
 
 const readButtons = document.querySelectorAll(".readButtons");
 
 for (const element of readButtons) {
     element.addEventListener("click", (event) => {
-        readClick(event.currentTarget, theLibrary);
+        readClick(event, theLibrary);
     });
 }
 
 function readClick(buttonElement, libraryInstance) {
-
-    const readBook = buttonElement.parentElement.dataset.id;
+    const readBook = buttonElement.currentTarget.parentElement.dataset.id;
+    console.log(libraryInstance.getLibrary);
     const found = libraryInstance.getLibrary.findIndex((element) => element.id === readBook);
     
     if (libraryInstance.getLibrary[found].read === true) {
@@ -173,7 +234,7 @@ function readClick(buttonElement, libraryInstance) {
 
     for (const element of readButtons) {
         element.addEventListener("click", (event) => {
-            readClick(event.currentTarget, theLibrary);
+            readClick(event, theLibrary);
         });
     }
 
@@ -181,10 +242,9 @@ function readClick(buttonElement, libraryInstance) {
 
     for(const element of removeButtons) {
         element.addEventListener("click", (event) => {
-            removeClick(event.currentTarget, theLibrary);
+            removeClick(event, theLibrary);
         });
     }
 }
-
 
 
